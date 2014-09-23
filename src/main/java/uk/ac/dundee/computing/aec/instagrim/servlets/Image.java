@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.TweetModel;
+import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 
 /**
  * Servlet implementation class Image
@@ -54,15 +55,15 @@ public class Image extends HttpServlet {
         // TODO Auto-generated method stub
         TweetModel tm = new TweetModel();
         tm.setCluster(cluster);
-        byte Image[] = tm.getPic();
-        System.out.println("Image Size " + Image.length);
+        Pic p = tm.getPic();
+        
         
         OutputStream out = response.getOutputStream();
         
-        response.setContentType("image/png");
-        response.setContentLength(Image.length);
+        response.setContentType(p.getType());
+        response.setContentLength(p.getLength());
         //out.write(Image);
-        InputStream is = new ByteArrayInputStream(Image);
+        InputStream is = new ByteArrayInputStream(p.getBytes());
         BufferedInputStream input = new BufferedInputStream(is);
         byte[] buffer = new byte[8192];
         for (int length = 0; (length = input.read(buffer)) > 0;) {
@@ -74,19 +75,23 @@ public class Image extends HttpServlet {
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         for (Part part : request.getParts()) {
-	      System.out.println(part.getName());
-	      InputStream is = request.getPart(part.getName()).getInputStream();
-	      int i = is.available();
-	      byte[] b  = new byte[i + 1];
-	      is.read(b);
-	      System.out.println("Length : " + b.length);
-              TweetModel tm = new TweetModel();
-              tm.setCluster(cluster);
-              tm.insertPic(b); 
+            System.out.println("Part Name "+part.getName());
+            
+            String type = part.getContentType();
+            String filename= part.getSubmittedFileName();
+            InputStream is = request.getPart(part.getName()).getInputStream();
+            int i = is.available();
+            if (i > 0) {
+                byte[] b = new byte[i + 1];
+                is.read(b);
+                System.out.println("Length : " + b.length);
+                TweetModel tm = new TweetModel();
+                tm.setCluster(cluster);
+                tm.insertPic(b, type,filename);
 
-	      is.close();
-	    }
-        
-       
+                is.close();
+            }
+        }
+
     }
 }
