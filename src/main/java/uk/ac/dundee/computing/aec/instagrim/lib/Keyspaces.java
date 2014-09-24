@@ -15,16 +15,25 @@ public final class Keyspaces {
         try {
             //Add some keyspaces here
             String createkeyspace = "create keyspace if not exists instagrim  WITH replication = {'class':'SimpleStrategy', 'replication_factor':1}";
-            String CreateTweetTable = "CREATE TABLE if not exists Pics ("
-                    + "user varchar,"
-                    + " interaction_time timeuuid,"
+            String CreatePicTable = "CREATE TABLE if not exists instagrim.Pics ("
+                    + " user varchar,"
+                    + " picid uuid, "
+                    + " interaction_time timestamp,"
                     + " title varchar,"
                     + " image blob,"
+                    + " thumb blob,"
+                    + " processed blob,"
                     + " imagelength int,"
                     + " type  varchar,"
                     + " name  varchar,"
-                    + " PRIMARY KEY (user,interaction_time)"
-                    + ") WITH CLUSTERING ORDER BY (interaction_time DESC);";
+                    + " PRIMARY KEY (picid)"
+                    + ")";
+            String Createuserpiclist ="CREATE TABLE if not exists instagrim.userpiclist (\n" +
+"picid uuid,\n" +
+"user varchar,\n" +
+"pic_added timestamp,\n" +
+"PRIMARY KEY (user,pic_added)\n" +
+") WITH CLUSTERING ORDER BY (pic_added desc);";
             Session session = c.connect();
             try {
                 PreparedStatement statement = session
@@ -39,15 +48,22 @@ public final class Keyspaces {
             }
 
             //now add some column families 
-            session.close();
-            session = c.connect("instagrim");
-            System.out.println("" + CreateTweetTable);
+
+            System.out.println("" + CreatePicTable);
 
             try {
-                SimpleStatement cqlQuery = new SimpleStatement(CreateTweetTable);
+                SimpleStatement cqlQuery = new SimpleStatement(CreatePicTable);
                 session.execute(cqlQuery);
             } catch (Exception et) {
                 System.out.println("Can't create tweet table " + et);
+            }
+                        System.out.println("" + CreatePicTable);
+
+            try {
+                SimpleStatement cqlQuery = new SimpleStatement(Createuserpiclist);
+                session.execute(cqlQuery);
+            } catch (Exception et) {
+                System.out.println("Can't create user pic list table " + et);
             }
             session.close();
 
