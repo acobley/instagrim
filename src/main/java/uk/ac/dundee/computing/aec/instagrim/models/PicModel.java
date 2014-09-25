@@ -54,17 +54,20 @@ public class PicModel {
         try {
             Convertors convertor = new Convertors();
 
+            String types[]=Convertors.SplitFiletype(type);
             ByteBuffer buffer = ByteBuffer.wrap(b);
             int length = b.length;
             java.util.UUID picid = convertor.getTimeUUID();
+            
+            //The following is a quick and dirty way of doing this, will fill the disk quickly !
             Boolean success = (new File("/var/tmp/instagrim/")).mkdirs();
             FileOutputStream output = new FileOutputStream(new File("/var/tmp/instagrim/" + picid));
 
             output.write(b);
-            byte []  thumbb = picresize(picid.toString());
+            byte []  thumbb = picresize(picid.toString(),types[1]);
             int thumblength= thumbb.length;
             ByteBuffer thumbbuf=ByteBuffer.wrap(thumbb);
-            byte[] processedb = picdecolour(picid.toString());
+            byte[] processedb = picdecolour(picid.toString(),types[1]);
             ByteBuffer processedbuf=ByteBuffer.wrap(processedb);
             int processedlength=processedb.length;
             Session session = cluster.connect("instagrim");
@@ -84,18 +87,16 @@ public class PicModel {
         }
     }
 
-    public byte[] picresize(String picid) {
+    public byte[] picresize(String picid,String type) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
             BufferedImage thumbnail = createThumbnail(BI);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(thumbnail, "jpg", baos);
+            ImageIO.write(thumbnail, type, baos);
             baos.flush();
-            baos.close();
-            byte[] imageInByte = baos.toByteArray();
             
-           
-           //ImageIO.write(thumbnail, "jpg",new File("/Users/Administrator/"+picid+"-Small.jpg"));
+            byte[] imageInByte = baos.toByteArray();
+            baos.close();
             return imageInByte;
         } catch (IOException et) {
 
@@ -103,12 +104,12 @@ public class PicModel {
         return null;
     }
     
-    public byte[] picdecolour(String picid) {
+    public byte[] picdecolour(String picid,String type) {
         try {
             BufferedImage BI = ImageIO.read(new File("/var/tmp/instagrim/" + picid));
             BufferedImage processed = createProcessed(BI);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(processed, "jpg", baos);
+            ImageIO.write(processed, type, baos);
             baos.flush();
             byte[] imageInByte = baos.toByteArray();
             baos.close();
@@ -120,7 +121,7 @@ public class PicModel {
     }
 
     public static BufferedImage createThumbnail(BufferedImage img) {
-        img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE, OP_DARKER);
+        img = resize(img, Method.SPEED, 250, OP_ANTIALIAS, OP_GRAYSCALE);
         // Let's add a little border before we return result.
         return pad(img, 2);
     }
