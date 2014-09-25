@@ -24,6 +24,8 @@ public final class Keyspaces {
                     + " thumb blob,"
                     + " processed blob,"
                     + " imagelength int,"
+                    + " thumblength int,"
+                    +"  processedlength int,"
                     + " type  varchar,"
                     + " name  varchar,"
                     + " PRIMARY KEY (picid)"

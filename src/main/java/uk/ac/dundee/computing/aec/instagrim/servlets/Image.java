@@ -111,7 +111,7 @@ public class Image extends HttpServlet {
   
         
         Pic p = tm.getPic(type,java.util.UUID.fromString(Image));
-
+        
         OutputStream out = response.getOutputStream();
 
         response.setContentType(p.getType());
@@ -145,6 +145,8 @@ public class Image extends HttpServlet {
 
                 is.close();
             }
+            RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
+             rd.forward(request, response);
         }
 
     }

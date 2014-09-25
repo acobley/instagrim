@@ -33,5 +33,7 @@
             }
             }
         %>
+        <hr>
+        <p><a href="/Instagrim/upload.jsp">Upload Page</a></p>
     </body>
 </html>

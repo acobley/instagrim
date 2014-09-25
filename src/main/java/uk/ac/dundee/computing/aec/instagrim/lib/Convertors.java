@@ -9,7 +9,7 @@ import com.eaio.uuid.UUID;
 public final class Convertors {
     public static int DISPLAY_IMAGE=0;
     public static int DISPLAY_THUMB=1;
-    public static int DISPLAY_PROCESSED=1;
+    public static int DISPLAY_PROCESSED=2;
     public void Convertors() {
 
     }
