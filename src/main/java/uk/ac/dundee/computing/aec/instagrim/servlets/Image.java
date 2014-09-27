@@ -70,9 +70,6 @@ public class Image extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         String args[] = Convertors.SplitRequestPath(request);
-        for (int i = 0; i < args.length; i++) {
-            System.out.println(i + " " + args[i]);
-        }
         int command;
         try {
             command = (Integer) CommandsMap.get(args[1]);
