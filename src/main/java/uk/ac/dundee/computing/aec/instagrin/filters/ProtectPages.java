@@ -14,10 +14,14 @@ import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
 /**
  *
@@ -108,6 +112,17 @@ public class ProtectPages implements Filter {
         
         doBeforeProcessing(request, response);
         System.out.println("Doing filter");
+        HttpServletRequest httpReq = (HttpServletRequest) request;
+        HttpSession session=httpReq.getSession(false);
+	LoggedIn li=(LoggedIn)session.getAttribute("LoggedIn");
+        System.out.println("Session in filter "+session);
+        if ((li == null)  || (li.getlogedin()==false)){
+               System.out.println("Foward to login");
+                RequestDispatcher rd=request.getRequestDispatcher("/login.jsp");
+		rd.forward(request,response);
+
+            
+        }
         Throwable problem = null;
         try {
             chain.doFilter(request, response);

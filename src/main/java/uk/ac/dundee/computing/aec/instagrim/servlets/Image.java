@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
@@ -24,6 +25,7 @@ import org.apache.commons.fileupload.util.Streams;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 
 /**
@@ -132,13 +134,19 @@ public class Image extends HttpServlet {
             
             InputStream is = request.getPart(part.getName()).getInputStream();
             int i = is.available();
+            HttpSession session=request.getSession();
+            LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
+            String username="majed";
+            if (lg.getlogedin()){
+                username=lg.getUsername();
+            }
             if (i > 0) {
                 byte[] b = new byte[i + 1];
                 is.read(b);
                 System.out.println("Length : " + b.length);
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
-                tm.insertPic(b, type, filename, "majed");
+                tm.insertPic(b, type, filename, username);
 
                 is.close();
             }
