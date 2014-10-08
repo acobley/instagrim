@@ -19,6 +19,7 @@
             <h1>InstaGrim ! </h1>
             <h2>Your world in Black and White</h2>
         </header>
+      
         <nav>
             <ul>
 
@@ -33,7 +34,15 @@
                     %>
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                 <form method = "POST" action = "Logout">   
+                     <input type = "submit" value="Logout">
+                </form>
+                
+                
                     <%}
+                            
+                   
+                            
                             }else{
                                 %>
                  <li><a href="register.jsp">Register</a></li>
@@ -42,13 +51,22 @@
                                         
                             
                     }%>
+               
+                
+                
             </ul>
+                   
+                    
+            
         </nav>
+    </body>
+    
+       
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
                 <li>&COPY; Andy C</li>
             </ul>
         </footer>
-    </body>
+   
 </html>

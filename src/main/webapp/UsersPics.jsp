@@ -55,4 +55,14 @@
             </ul>
         </footer>
     </body>
+    
+    <% if (session == null){
+        response.sendRedirect("/Instagrim");
+    }
+    
+    
+    %>
+    
+    
+    
 </html>
