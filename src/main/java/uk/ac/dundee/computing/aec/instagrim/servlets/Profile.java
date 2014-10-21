@@ -5,20 +5,32 @@
  */
 package uk.ac.dundee.computing.aec.instagrim.servlets;
 
+import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
+
 
 /**
  *
  * @author Shaun Smith
  */
-@WebServlet(name = "Logout", urlPatterns = {"/Logout"})
-public class Logout extends HttpServlet {
+@WebServlet(name = "Profile", urlPatterns = {"/Profile",
+    "/profile",
+    "/userProf",
+    "/Profile/"
+})
+public class Profile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +44,7 @@ public class Logout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-        
-    }
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -64,9 +74,8 @@ public class Logout extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-         request.getSession().invalidate();
-         response.sendRedirect("/Instagrim");
-         
+      LoggedIn lg = (LoggedIn)request.getAttribute("LoggedIn");
+      response.sendRedirect("/userProf.jsp");
     }
 
     /**
@@ -79,9 +88,4 @@ public class Logout extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
-    
-    
-    
-    
 }
