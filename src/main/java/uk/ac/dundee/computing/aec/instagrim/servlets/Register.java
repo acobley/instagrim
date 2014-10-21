@@ -31,9 +31,6 @@ public class Register extends HttpServlet {
         cluster = CassandraHosts.getCluster();
     }
 
-
-
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -47,12 +44,17 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
+        String lastname=request.getParameter("lastname");
         
         User us=new User();
-        us.setCluster(cluster);
-        us.RegisterUser(username, password);
+        us.setCluster(cluster); //refers to current instance
+        if(us.RegisterUser(username, password) == false) 
+        {
+            response.sendRedirect("/Instagrim/register.jsp"); //send user to error page
+        } else {
+           response.sendRedirect("/Instagrim");
+        }
         
-	response.sendRedirect("/Instagrim");
         
     }
 

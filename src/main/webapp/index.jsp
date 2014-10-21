@@ -27,15 +27,18 @@
                     <%
                         
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                        if (lg != null) {
+                        if (lg != null) 
+                        {
                             String UserName = lg.getUsername();
                             if (lg.getlogedin()) {
                     %>
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                <li><a href="/Instagrim/">Log out</a></li> <!--log out button lg.setLogedout() -->
                     <%}
                             }else{
                                 %>
+                
                  <li><a href="register.jsp">Register</a></li>
                 <li><a href="login.jsp">Login</a></li>
                 <%
