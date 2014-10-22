@@ -3,8 +3,12 @@
     Created on : 21-Oct-2014, 18:11:14
     Author     : Shaun Smith
 --%>
-
+<%@page import="java.util.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,16 +16,18 @@
         <title>User Profile</title>
     </head>
     <body>
-       <% 
-           request.getParameter (LoggedIn.Username);
        
-       
-       %>
+        <h1> hello world </h1>
         
-        <h1>              </h1>
-    
-    
-    
-    
+  <% java.util.LinkedList<String> userInfo = (java.util.LinkedList<String>) 
+          
+        request.getAttribute("userInfo"); 
+        String username = userInfo.getFirst();
+     
+            
+  %>
+       
+   <%=username%>
+ 
     </body>
 </html>

@@ -8,6 +8,7 @@ package uk.ac.dundee.computing.aec.instagrim.servlets;
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
@@ -25,28 +27,31 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
  *
  * @author Shaun Smith
  */
-@WebServlet(name = "Profile", urlPatterns = {"/Profile",
-    "/profile",
-    "/userProf",
-    "/Profile/"
-})
+@WebServlet(urlPatterns = 
+ {  "/Profile",
+    "/Profile/*"
+ })
 public class Profile extends HttpServlet {
+    private Cluster cluster;
+    private HashMap CommandsMap = new HashMap();
+    
+    
+    
+    public Profile()
+    {
+        super();
+        CommandsMap.put ("Profile/*",1);
+  }
+    
+    
+ public void init(ServletConfig config) throws ServletException 
+    {
+        // TODO Auto-generated method stub
+        cluster = CassandraHosts.getCluster();
+    }
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -58,9 +63,31 @@ public class Profile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+        String args[] = Convertors.SplitRequestPath(request);
+        
+        String user = args[2];
+    
+        
+     DisplayUserInfo(user , request, response);
+               
     }
+    
+     private void DisplayUserInfo(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User us = new User();
+        us.setCluster(cluster);
+        java.util.LinkedList<String> userInfo = us.getUserinfo(User);
+        RequestDispatcher rd = request.getRequestDispatcher("/userProf.jsp");
+        request.setAttribute("userInfo", userInfo);
+        rd.forward(request, response);
 
+    }
+    
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+      }
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -74,10 +101,10 @@ public class Profile extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
         
-      LoggedIn lg = (LoggedIn)request.getAttribute("LoggedIn");
-      response.sendRedirect("/userProf.jsp");
     }
-
+    
+  
+    
     /**
      * Returns a short description of the servlet.
      *
@@ -88,4 +115,19 @@ public class Profile extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+       private void error(String mess, HttpServletResponse response) throws ServletException, IOException {
+
+        PrintWriter out = null;
+        out = new PrintWriter(response.getOutputStream());
+        out.println("<h1>You have an error in your input</h1>");
+        out.println("<h2>" + mess + "</h2>");
+        
+        out.close();
+        return;
+    }
+    
+    
+    
+    
+    
 }

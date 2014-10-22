@@ -27,6 +27,8 @@ public class User {
         
     }
     
+      
+    
     public boolean RegisterUser(String username, String Password){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
@@ -48,7 +50,30 @@ public class User {
         return true;
     }
     
-    public boolean IsValidUser(String username, String Password){
+    public java.util.LinkedList<String> getUserinfo(String User) {
+        java.util.LinkedList<String> Userinfo = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        User));
+        if (rs.isExhausted()) {
+            System.out.println("No user found");
+            return null;
+        } else {
+            for (Row row : rs) {
+                String login = row.getString("login");
+                Userinfo.push(login);
+
+            }
+        }
+        return Userinfo;
+    }
+    
+  
+ public boolean IsValidUser(String username, String Password){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
@@ -76,6 +101,7 @@ public class User {
             }
         }
    
+        
     
     return false;  
     }

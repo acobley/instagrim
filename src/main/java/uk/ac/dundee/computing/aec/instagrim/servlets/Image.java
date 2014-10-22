@@ -66,9 +66,12 @@ public class Image extends HttpServlet {
     }
 
     /**
+     * @param request
+     * @param response
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
      * response)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         String args[] = Convertors.SplitRequestPath(request);
@@ -76,7 +79,7 @@ public class Image extends HttpServlet {
         try {
             command = (Integer) CommandsMap.get(args[1]);
         } catch (Exception et) {
-            error("Bad Operator", response);
+            error("catch problem", response);
             return;
         }
         switch (command) {
@@ -160,7 +163,7 @@ public class Image extends HttpServlet {
 
         PrintWriter out = null;
         out = new PrintWriter(response.getOutputStream());
-        out.println("<h1>You have a na error in your input</h1>");
+        out.println("<h1>You have an error in your input</h1>");
         out.println("<h2>" + mess + "</h2>");
         out.close();
         return;
