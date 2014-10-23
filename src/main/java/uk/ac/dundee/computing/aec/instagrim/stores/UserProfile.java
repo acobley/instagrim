@@ -13,12 +13,20 @@ public class UserProfile {
     String login = null;
     String fName = null;
     String sName = null;
+    private java.util.UUID UUID=null;
     
     public void UserProfile(){
         
     }
 
-    public String getLogin() {
+    public void setUUID(java.util.UUID UUID){
+        this.UUID =UUID;
+    }
+    public String getSUUID(){
+        return UUID.toString();
+    }
+    
+     public String getLogin() {
         return login;
     }
 

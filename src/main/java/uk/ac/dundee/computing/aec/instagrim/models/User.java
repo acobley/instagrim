@@ -30,7 +30,7 @@ public class User {
     
       
     
-    public boolean RegisterUser(String username, String Password){
+    public boolean RegisterUser(String username, String Password, String firstName, String lastName){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
@@ -40,12 +40,12 @@ public class User {
             return false;
         }
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
+        PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name) Values(?,?,?,?)");
        
         BoundStatement boundStatement = new BoundStatement(ps);
         session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        username,EncodedPassword));
+                        username,EncodedPassword,firstName,lastName));
         //We are assuming this always works.  Also a transaction would be good here !
         
         return true;
@@ -54,7 +54,7 @@ public class User {
     public java.util.LinkedList<UserProfile> getUserinfo(String User) {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
+        PreparedStatement ps = session.prepare("select login, first_name, last_name from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -67,8 +67,11 @@ public class User {
             for (Row row : rs) {
                 UserProfile userprof = new UserProfile();
                 String login = row.getString("login");
+                String firstName = row.getString ("first_name");
+                String lastName = row.getString ("last_name");
                 userprof.setLogin(login);
-                
+                userprof.setfName(firstName);
+                userprof.setsName(lastName);
                 Userinfo.push(userprof);
             }
         }

@@ -34,10 +34,28 @@
       {
        UserProfile user = (UserProfile) userInfo.get(0);
        String userLog = user.getLogin();
+       String firstName = user.getfName();
+       String lastName = user.getsName();
     %>
-       <h2> Profile of: </h2> <%=userLog%>
+       <h2> Profile of: <%=userLog%> </h2> 
+       <p>First Name:<%=firstName%> </p>
+       <p>Last Name:<%=lastName%> </p>
  <%
       }
  %>
+ 
+       <article>
+            <h3>Upload Profile Pic</h3>
+            <form method="POST" enctype="multipart/form-data" action="userImage">
+                File to upload: <input type="file" name="upfile"><br/>
+             <br/>
+                <input type="submit" value="Press"> to upload the file!
+            </form>
+
+        </article>
+ 
+ 
+ 
+ 
     </body>
 </html>
