@@ -21,15 +21,15 @@ import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
-
+import uk.ac.dundee.computing.aec.instagrim.stores.UserProfile;
 
 /**
  *
  * @author Shaun Smith
  */
 @WebServlet(urlPatterns = 
- {  "/Profile",
-    "/Profile/*"
+ {  "/Profile/*",
+    "/Profiles"
  })
 public class Profile extends HttpServlet {
     private Cluster cluster;
@@ -41,6 +41,7 @@ public class Profile extends HttpServlet {
     {
         super();
         CommandsMap.put ("Profile/*",1);
+        CommandsMap.put ("Profiles", 2);
   }
     
     
@@ -76,7 +77,7 @@ public class Profile extends HttpServlet {
      private void DisplayUserInfo(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User us = new User();
         us.setCluster(cluster);
-        java.util.LinkedList<String> userInfo = us.getUserinfo(User);
+        java.util.LinkedList<UserProfile> userInfo = us.getUserinfo(User);
         RequestDispatcher rd = request.getRequestDispatcher("/userProf.jsp");
         request.setAttribute("userInfo", userInfo);
         rd.forward(request, response);

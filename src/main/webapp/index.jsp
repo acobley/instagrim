@@ -35,6 +35,7 @@
 
                 <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                 <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>"> Your Profile </a></li>
+                <li><a href="/Instagrim/Profiles"> Community Profiles </a> </li>
                  <form method = "POST" action = "Logout">   
                      <input type = "submit" value="Logout">
                 </form>

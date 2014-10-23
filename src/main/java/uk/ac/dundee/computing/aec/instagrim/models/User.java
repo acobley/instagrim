@@ -16,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrim.stores.UserProfile;
 
 /**
  *
@@ -50,10 +51,10 @@ public class User {
         return true;
     }
     
-    public java.util.LinkedList<String> getUserinfo(String User) {
-        java.util.LinkedList<String> Userinfo = new java.util.LinkedList<>();
+    public java.util.LinkedList<UserProfile> getUserinfo(String User) {
+        java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
+        PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -64,9 +65,11 @@ public class User {
             return null;
         } else {
             for (Row row : rs) {
+                UserProfile userprof = new UserProfile();
                 String login = row.getString("login");
-                Userinfo.push(login);
-
+                userprof.setLogin(login);
+                
+                Userinfo.push(userprof);
             }
         }
         return Userinfo;

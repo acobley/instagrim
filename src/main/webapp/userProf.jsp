@@ -16,18 +16,28 @@
         <title>User Profile</title>
     </head>
     <body>
-       
-        <h1> hello world </h1>
+    <h1>InstaGrim ! </h1>
+    <h2>Your world in Black and White</h2>   
         
-  <% java.util.LinkedList<String> userInfo = (java.util.LinkedList<String>) 
-          
-        request.getAttribute("userInfo"); 
-        String username = userInfo.getFirst();
-     
-            
+        
+  <% 
+      java.util.LinkedList<UserProfile> userInfo = (java.util.LinkedList<UserProfile>) request.getAttribute("userInfo"); 
+      
+      if (userInfo == null){
+      
   %>
-       
-   <%=username%>
- 
+   <p> No Profile Found </P>
+   <li class="footer"><a href="/Instagrim">Home</a></li>
+   
+   <% }
+      else 
+      {
+       UserProfile user = (UserProfile) userInfo.get(0);
+       String userLog = user.getLogin();
+    %>
+       <h2> Profile of: </h2> <%=userLog%>
+ <%
+      }
+ %>
     </body>
 </html>
