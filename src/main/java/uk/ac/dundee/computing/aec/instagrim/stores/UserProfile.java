@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package uk.ac.dundee.computing.aec.instagrim.stores;
-
+import java.util.UUID;
 /**
  *
  * @author Shaun Smith
@@ -13,17 +13,17 @@ public class UserProfile {
     String login = null;
     String fName = null;
     String sName = null;
-    private java.util.UUID UUID=null;
+    private UUID profPic=null;
     
     public void UserProfile(){
         
     }
 
-    public void setUUID(java.util.UUID UUID){
-        this.UUID =UUID;
+    public void setUUID(UUID profpic){
+        this.profPic = profpic;
     }
-    public String getSUUID(){
-        return UUID.toString();
+    public UUID getUUID(){
+        return profPic;
     }
     
      public String getLogin() {

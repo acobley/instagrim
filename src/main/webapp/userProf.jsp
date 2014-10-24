@@ -36,23 +36,46 @@
        String userLog = user.getLogin();
        String firstName = user.getfName();
        String lastName = user.getsName();
+      
     %>
        <h2> Profile of: <%=userLog%> </h2> 
        <p>First Name:<%=firstName%> </p>
        <p>Last Name:<%=lastName%> </p>
- <%
-      }
- %>
- 
-       <article>
-            <h3>Upload Profile Pic</h3>
-            <form method="POST" enctype="multipart/form-data" action="userImage">
-                File to upload: <input type="file" name="upfile"><br/>
-             <br/>
-                <input type="submit" value="Press"> to upload the file!
-            </form>
+       
+       <% if (user.getUUID() != null) 
+       {
+           
+       }
+       %>
+        
+       <a href="/Instagrim/Image/<%=user.getUUID()%>" ><img src="/Instagrim/Thumb/<%=user.getUUID()%>"></a><br/>
+       <li><a href="/Instagrim/editProfInfo/<%=user.getLogin()%>"> Edit your Profile Information </a></li>
+      
+       <% 
+        
+       }
+       %>
+       
+       
+       
+       
+      
+   
+     
+     
+     
+     
+   
+    
+     
+     
+     
+       
 
-        </article>
+     
+
+ 
+       
  
  
  

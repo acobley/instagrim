@@ -51,15 +51,30 @@ public class User {
         return true;
     }
     
-    public java.util.LinkedList<UserProfile> getUserinfo(String User) {
+    public boolean updateUser(String username,String firstName, String lastName){
+       
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("update userprofiles set first_name =?, last_name = ? where login = ?");
+       
+        BoundStatement boundStatement = new BoundStatement(ps);
+        session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        firstName,lastName,username));
+        //We are assuming this always works.  Also a transaction would be good here !
+        
+        return true;
+    }
+    
+    public java.util.LinkedList<UserProfile> getUserinfo(String user) {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select login, first_name, last_name from userprofiles where login =?");
+        PreparedStatement ps = session.prepare("select login, first_name, last_name, picid from userprofiles where login =?");
+        System.out.println ("user=" +user);
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        User));
+                        user));
         if (rs.isExhausted()) {
             System.out.println("No user found");
             return null;
@@ -69,11 +84,13 @@ public class User {
                 String login = row.getString("login");
                 String firstName = row.getString ("first_name");
                 String lastName = row.getString ("last_name");
+                java.util.UUID picid = row.getUUID ("picid");
                 userprof.setLogin(login);
                 userprof.setfName(firstName);
                 userprof.setsName(lastName);
+                userprof.setUUID (picid);
                 Userinfo.push(userprof);
-            }
+               }
         }
         return Userinfo;
     }

@@ -140,8 +140,10 @@ public class Image extends HttpServlet {
             HttpSession session=request.getSession();
             LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
             String username="majed";
+            String login=" ";
             if (lg.getlogedin()){
                 username=lg.getUsername();
+                login = lg.getUsername();
             }
             if (i > 0) {
                 byte[] b = new byte[i + 1];
@@ -149,7 +151,7 @@ public class Image extends HttpServlet {
                 System.out.println("Length : " + b.length);
                 PicModel tm = new PicModel();
                 tm.setCluster(cluster);
-                tm.insertPic(b, type, filename, username);
+                tm.insertPic(b, type, filename, username, login);
 
                 is.close();
             }
