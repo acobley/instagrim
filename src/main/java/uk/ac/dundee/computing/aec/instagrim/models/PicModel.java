@@ -50,10 +50,10 @@ public class PicModel {
         this.cluster = cluster;
     }
 
-    public void insertPic(byte[] b, String type, String name, String user, String login) {
+    public void insertPic(byte[] b, String type, String name, String user, String login, String profpic) {
         try {
             Convertors convertor = new Convertors();
-
+            
             String types[]=Convertors.SplitFiletype(type);
             ByteBuffer buffer = ByteBuffer.wrap(b);
             int length = b.length;
@@ -72,18 +72,35 @@ public class PicModel {
             int processedlength=processedb.length;
             Session session = cluster.connect("instagrim");
 
-            PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
-            PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
-            PreparedStatement psInsertPicToProf = session.prepare("update userprofiles set picid = ? where login = ?");
-            BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
-            BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
-            BoundStatement bsInsertPicToProf = new BoundStatement(psInsertPicToProf);
-
-            Date DateAdded = new Date();
-            session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
-            session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
-            session.execute(bsInsertPicToProf.bind(picid,login));
-            session.close();
+            if (profpic != null && profpic.compareTo("userImage") == 0 )
+            {
+                PreparedStatement psInsertPicToProf = session.prepare("update userprofiles set picid = ? where login = ?");
+                PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
+                BoundStatement bsInsertPicToProf = new BoundStatement(psInsertPicToProf);
+                BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
+                BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
+                Date DateAdded = new Date();
+                session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
+                session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
+                session.execute(bsInsertPicToProf.bind(picid,login));
+                session.close();
+                System.out.println ("got into if statement");
+            }
+            else
+            {
+                PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
+                Date DateAdded = new Date();
+                BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
+                BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
+                session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
+                session.execute(bsInsertPicToUser.bind(picid, user, DateAdded)); 
+                session.close();
+                System.out.println("got into else statement");
+            }
+            
+            
 
         } catch (IOException ex) {
             System.out.println("Error --> " + ex);

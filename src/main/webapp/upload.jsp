@@ -28,6 +28,7 @@
                 File to upload: <input type="file" name="upfile"><br/>
 
                 <br/>
+                <input type="checkbox" name ="profilePictureup" value="userImage"> Profile Picture?
                 <input type="submit" value="Press"> to upload the file!
             </form>
 

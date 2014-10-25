@@ -72,10 +72,10 @@ public class Profile extends HttpServlet {
                
     }
     
-     private void getUserProfile(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     private void getUserProfile(String user, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User us = new User();
         us.setCluster(cluster);
-        java.util.LinkedList<UserProfile> userInfo = us.getUserinfo(User);
+        java.util.LinkedList<UserProfile> userInfo = us.getUserinfo(user);
         RequestDispatcher rd = request.getRequestDispatcher("/userProf.jsp");
         request.setAttribute("userInfo", userInfo);
         rd.forward(request, response);

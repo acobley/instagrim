@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 import uk.ac.dundee.computing.aec.instagrim.stores.UserProfile;
+import java.util.UUID;
 
 /**
  *
@@ -69,7 +70,6 @@ public class User {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select login, first_name, last_name, picid from userprofiles where login =?");
-        System.out.println ("user=" +user);
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -84,7 +84,7 @@ public class User {
                 String login = row.getString("login");
                 String firstName = row.getString ("first_name");
                 String lastName = row.getString ("last_name");
-                java.util.UUID picid = row.getUUID ("picid");
+                UUID picid = row.getUUID ("picid");
                 userprof.setLogin(login);
                 userprof.setfName(firstName);
                 userprof.setsName(lastName);
@@ -95,8 +95,32 @@ public class User {
         return Userinfo;
     }
     
-  
- public boolean IsValidUser(String username, String Password){
+    public java.util.LinkedList<UserProfile> getUserNames() {
+        java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login, picid from userprofiles");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        ));
+        if (rs.isExhausted()) {
+            System.out.println("No users found");
+            return null;
+        } else {
+            for (Row row : rs) {
+                UserProfile userprof = new UserProfile();
+                String login = row.getString("login");
+                UUID picid = row.getUUID("picid");
+                userprof.setLogin(login);
+                userprof.setUUID(picid);
+                Userinfo.push(userprof);
+               }
+        }
+        return Userinfo;
+    }
+    
+    public boolean IsValidUser(String username, String Password){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
