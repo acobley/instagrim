@@ -31,6 +31,8 @@
                     <li>User Name <input type="text" name="username" value = "<%=user.getLogin()%>" readonly="readonly"></li>
                     <li>First Name <input type="text" name="First Name" value = "<%=user.getfName()%>"</li> 
                     <li>Second Name <input type="text" name="Last Name" value = "<%=user.getsName()%>"</li>
+                    <li>Email <input type="email" name="email" value = "<%=user.getEmail()%>"</li>
+                    <li>Bio <input type="text" name="bio" value = "<%=user.getBio()%>"</li>
                 </ul>
                 <br/>
                 <input type="submit" value="Update"> 
@@ -45,10 +47,18 @@
           } 
        
        %>
-
-         
-        
-        
-        
     </body>
+
+    <footer>
+            <ul>
+                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li>&COPY; Shaun C</li>
+            </ul>
+    </footer>
+         
+         
+         
+         
+         
+         
 </html>

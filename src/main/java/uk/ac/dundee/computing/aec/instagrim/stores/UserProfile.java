@@ -13,6 +13,8 @@ public class UserProfile {
     String login = null;
     String fName = null;
     String sName = null;
+    String email = null;
+    String bio = null;
     private UUID profPic=null;
     
     public void UserProfile(){
@@ -49,6 +51,24 @@ public class UserProfile {
     public void setsName(String sName) {
         this.sName = sName;
     }
+    
+    public void setEmail (String email)
+    {
+        this.email = email;
+    }
+    public String getEmail()
+     {
+         return email;
+     }
+    public void setBio(String bio)
+    {
+        this.bio = bio;
+    }
+    public String getBio()
+    {
+        return bio;
+    }
+    
     
 }
 

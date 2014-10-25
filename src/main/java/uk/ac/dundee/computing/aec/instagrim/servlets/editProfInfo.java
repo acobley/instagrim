@@ -74,13 +74,7 @@ public class editProfInfo extends HttpServlet {
         java.util.LinkedList<UserProfile> userInfo = us.getUserinfo(user);
         RequestDispatcher rd = request.getRequestDispatcher("/editinfo.jsp");
         request.setAttribute("userInfo", userInfo);
-     
-        UserProfile userpr = (UserProfile) userInfo.get(0);
-        String fname =userpr.getfName();
-        String sname =userpr.getsName();
-        System.out.println("fname=" +fname);
-        System.out.println("sname="+ sname);
-           rd.forward(request, response);
+        rd.forward(request, response);
     }
     
     /**
@@ -98,12 +92,12 @@ public class editProfInfo extends HttpServlet {
         String username=request.getParameter("username");
         String firstName=request.getParameter("First Name");
         String lastName=request.getParameter("Last Name");
-        System.out.println ("firstName =" + firstName);
-        System.out.println ("lastName=" + lastName);
+        String email=request.getParameter("email");
+        String bio = request.getParameter("bio");
         
         User us=new User();
         us.setCluster(cluster);
-        us.updateUser(username, firstName, lastName);
+        us.updateUser(username, firstName, lastName, email, bio);
         
 	response.sendRedirect("/Instagrim");
         

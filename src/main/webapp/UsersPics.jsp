@@ -29,7 +29,7 @@
         </nav>
  
         <article>
-            <h1>Your Pics</h1>
+            <h1>Image Gallery</h1>
         <%
             java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
             if (lsPics == null) {
@@ -62,7 +62,6 @@
     
     
     %>
-    
     
     
 </html>

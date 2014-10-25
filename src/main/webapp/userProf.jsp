@@ -33,79 +33,52 @@
        String userLog = user.getLogin();
        String firstName = user.getfName();
        String lastName = user.getsName();
+       String email = user.getEmail();
+       String bio = user.getBio();
 %>
        <h2>Profile of: <%=userLog%></h2> 
-       <p>First Name:<%=firstName%></p>
-       <p>Last Name:<%=lastName%></p>
-<%      if (user.getUUID() == null)
+       <p>First Name: <%=firstName%></p>
+       <p>Last Name: <%=lastName%></p>
+       <p>Email: <%=email%></p>
+       <p>Bio: <%=bio%></p>
+
+       <%      if (user.getUUID() == null)
         {
-%>
-        <p>No User image found</p>
+%>       
+        <img src="http://www.bensdiscountsupply.com/images/products/detail/black_thumbnail.jpg"width ="100" height ="100"></a>
+        <br>
+        <br>
+
 <%
         }
-            else{
+             else{
 %>
                 <a href="/Instagrim/Image/<%=user.getUUID()%>" ><img src="/Instagrim/Thumb/<%=user.getUUID()%>"></a><br/>  
+                <br>
+                <br>
 <%              }
                 if(lg.getUsername()!= null && user.getLogin().compareTo(lg.getUsername())== 0)
                 {
-%>       
+%>                  
+                    <li><a href="/Instagrim/upload.jsp">Edit your profile Picture</a></li>
+                    <li><a href="/Instagrim/Images/<%=user.getLogin()%>">Your Images</a></li>
                     <li><a href="/Instagrim/editProfInfo/<%=user.getLogin()%>"> Edit your Profile Information </a></li>     
 <%       
                 }
                     else
                 {
-                
 %>                
+                    <li><a href="/Instagrim/Images/<%=user.getLogin()%>"><%=user.getLogin()%>'s images</a></li>
                     <p> </p>
 <%
                 }
       }    
 %>
-
-
-          
-             
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-       
-       
-       
-      
-   
-     
-     
-     
-     
-   
-    
-     
-     
-     
-       
-
-     
-
- 
-       
- 
- 
- 
- 
-    </body>
+ </body>
+<footer>
+            <ul>
+                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li>&COPY; Shaun C</li>
+            </ul>
+</footer>
 </html>

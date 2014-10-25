@@ -33,18 +33,37 @@
             iterator = userList.iterator();
             while (iterator.hasNext()) { 
                 UserProfile user = (UserProfile) iterator.next();
+                
+         if (user.getUUID()==null)
+          {
             
         %>
+        <div><img src="http://www.bensdiscountsupply.com/images/products/detail/black_thumbnail.jpg"width ="100" height ="100"></a></li>    
+        <a href="/Instagrim/Profile/<%=user.getLogin()%>"> <%=user.getLogin()%>'s Profile </a> </div>
+        <br> 
+        <br>
+        <%
+         }
+         else
+         {
+         %>
         <div><a href="/Instagrim/Image/<%=user.getUUID()%>" ><img src="/Instagrim/Thumb/<%=user.getUUID()%>"width ="100" height ="100"></a></li>    
         <a href="/Instagrim/Profile/<%=user.getLogin()%>"> <%=user.getLogin()%>'s Profile </a> </div>
         <br> 
         <br>
-        
-        <%
+         <%
+         }
          }
          }
         %>
      
-       
     </body>
+    
+    
+    <footer>
+            <ul>
+                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li>&COPY; Shaun C</li>
+            </ul>
+    </footer>
 </html>
