@@ -29,9 +29,7 @@ public class User {
         
     }
     
-      
-    
-    public boolean RegisterUser(String username, String Password, String firstName, String lastName, String email, String bio){
+public boolean RegisterUser(String username, String Password, String firstName, String lastName, String email, String bio){
         AeSimpleSHA1 sha1handler=  new AeSimpleSHA1();
         String EncodedPassword=null;
         try {
@@ -64,6 +62,27 @@ public class User {
         
         return true;
     }
+    
+    public boolean CheckExisting(String username)
+    {
+        Session sessions = cluster.connect("instagrim");
+        PreparedStatement ps = sessions.prepare ("select login from userprofiles where login = ?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+         rs = sessions.execute(
+                boundStatement.bind( 
+                        username));
+        
+        if (rs.isExhausted()) {
+            System.out.println("User not in database!");
+            return true;
+        } 
+        else 
+            {
+                return false; 
+            }
+    }
+    
     
     public java.util.LinkedList<UserProfile> getUserinfo(String user) {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
@@ -101,12 +120,8 @@ public class User {
     public java.util.LinkedList<UserProfile> getUserNames() {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select login, picid from userprofiles");
         ResultSet rs = null;
-        BoundStatement boundStatement = new BoundStatement(ps);
-        rs = session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
-                        ));
+        rs = session.execute("select login, picid from userprofiles");
         if (rs.isExhausted()) {
             System.out.println("No users found");
             return null;

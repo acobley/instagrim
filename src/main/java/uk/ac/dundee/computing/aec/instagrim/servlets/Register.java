@@ -51,16 +51,23 @@ public class Register extends HttpServlet {
         String lastName=request.getParameter("lastName");
         String email =request.getParameter("email");
         String bio = request.getParameter("bio");
-       
-        
         User us=new User();
         us.setCluster(cluster);
-        us.RegisterUser(username, password, firstName, lastName, email, bio);
+        boolean existingUser = us.CheckExisting(username);
         
-	response.sendRedirect("/Instagrim");
+        if (existingUser == true)
+        { us.RegisterUser(username, password, firstName, lastName, email, bio);
+        
+            response.sendRedirect("/Instagrim");
+        }
+        else
+        {
+           response.sendRedirect("/Instagrim");
+        }
+        
         
     }
-
+    
     /**
      * Returns a short description of the servlet.
      *

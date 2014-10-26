@@ -110,8 +110,6 @@ public class Image extends HttpServlet {
     private void DisplayImage(int type,String Image, HttpServletResponse response) throws ServletException, IOException {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
-  
-        
         Pic p = tm.getPic(type,java.util.UUID.fromString(Image));
         
         OutputStream out = response.getOutputStream();

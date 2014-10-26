@@ -29,7 +29,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
+import java.util.UUID;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
@@ -153,6 +156,47 @@ public class PicModel {
         return pad(img, 4);
     }
    
+    public java.util.LinkedList<Pic> getComments(String imageUUID){
+          
+        java.util.LinkedList<Pic> commentList = new java.util.LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        UUID uid = UUID.fromString(imageUUID);
+        PreparedStatement ps = session.prepare("select user, comments, picid from pics where picid =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( boundStatement.bind(uid));
+          if (rs.isExhausted()) {
+            System.out.println("No Images returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+                Pic pic = new Pic();
+                Set<String> com = row.getSet("comments", String.class);
+                java.util.UUID UUID = row.getUUID("picid");
+                String user = row.getString ("user");
+                pic.setUser(user);
+                pic.setUUID(UUID);
+                pic.setComments(com);
+                commentList.add(pic);
+
+            }
+        }
+        return commentList;
+    }
+        
+    public boolean submitComment (String comment, String pUUID )
+    {
+        
+        Session session = cluster.connect("instagrim");
+        UUID uid = UUID.fromString(pUUID);
+        PreparedStatement ps = session.prepare ("update pics set comments = comments + ? where picid = ?");
+        Set<String> com = new HashSet();
+        com.add(comment);
+        BoundStatement boundStatement = new BoundStatement (ps);
+        session.execute(boundStatement.bind(com , uid));
+        return true;
+    }
+    
     public java.util.LinkedList<Pic> getPicsForUser(String User) {
         java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
