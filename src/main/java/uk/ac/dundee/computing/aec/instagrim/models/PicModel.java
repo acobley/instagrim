@@ -31,19 +31,22 @@ import java.nio.ByteBuffer;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import javax.imageio.ImageIO;
+import javax.xml.stream.events.Comment;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
-
 import uk.ac.dundee.computing.aec.instagrim.lib.*;
+import uk.ac.dundee.computing.aec.instagrim.stores.CommentStore;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 //import uk.ac.dundee.computing.aec.stores.TweetStore;
 
 public class PicModel {
 
     Cluster cluster;
+    
 
     public void PicModel() {
 
@@ -156,44 +159,47 @@ public class PicModel {
         return pad(img, 4);
     }
    
-    public java.util.LinkedList<Pic> getComments(String imageUUID){
+    public java.util.LinkedList<CommentStore> getComments(String imageUUID){
           
-        java.util.LinkedList<Pic> commentList = new java.util.LinkedList<>();
+        java.util.LinkedList<CommentStore> commentList = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
+        
         UUID uid = UUID.fromString(imageUUID);
-        PreparedStatement ps = session.prepare("select user, comments, picid from pics where picid =?");
+        PreparedStatement ps = session.prepare("select user, uscomment, picid from comments where picid =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( boundStatement.bind(uid));
+        session.close();
           if (rs.isExhausted()) {
             System.out.println("No Images returned");
             return null;
         } else {
             for (Row row : rs) {
-                Pic pic = new Pic();
-                Set<String> com = row.getSet("comments", String.class);
+                CommentStore comList = new CommentStore();
+                String com = row.getString("uscomment");
                 java.util.UUID UUID = row.getUUID("picid");
                 String user = row.getString ("user");
-                pic.setUser(user);
-                pic.setUUID(UUID);
-                pic.setComments(com);
-                commentList.add(pic);
-
+                comList.setUser(user);
+                comList.setUUID(UUID);
+                comList.setComments(com);
+                commentList.add(comList);
             }
         }
+        session.close();
         return commentList;
     }
         
-    public boolean submitComment (String comment, String pUUID )
+    public boolean submitComment (String comments, String pUUID, String user)
     {
-        
+        Convertors convertor = new Convertors();
         Session session = cluster.connect("instagrim");
+        UUID commentID = convertor.getTimeUUID();
         UUID uid = UUID.fromString(pUUID);
-        PreparedStatement ps = session.prepare ("update pics set comments = comments + ? where picid = ?");
-        Set<String> com = new HashSet();
-        com.add(comment);
+        System.out.println("submit info" + comments+ pUUID+ user);
+        PreparedStatement ps = session.prepare ("insert into comments (commentid, uscomment, picid, user) values (?,?,?,?)");
         BoundStatement boundStatement = new BoundStatement (ps);
-        session.execute(boundStatement.bind(com , uid));
+        session.execute(boundStatement.bind(commentID, comments , uid, user));
+        session.close();
         return true;
     }
     
@@ -203,9 +209,10 @@ public class PicModel {
         PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
-        rs = session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
+        rs = session.execute( 
+                boundStatement.bind( 
                         User));
+        session.close();
         if (rs.isExhausted()) {
             System.out.println("No Images returned");
             return null;
@@ -219,6 +226,7 @@ public class PicModel {
 
             }
         }
+       
         return Pics;
     }
 
@@ -241,10 +249,10 @@ public class PicModel {
                 ps = session.prepare("select processed,processedlength,type from pics where picid =?");
             }
             BoundStatement boundStatement = new BoundStatement(ps);
-            rs = session.execute( // this is where the query is executed
-                    boundStatement.bind( // here you are binding the 'boundStatement'
+            rs = session.execute( 
+                    boundStatement.bind( 
                             picid));
-
+            session.close();
             if (rs.isExhausted()) {
                 System.out.println("No Images returned");
                 return null;
@@ -270,7 +278,7 @@ public class PicModel {
             System.out.println("Can't get Pic" + et);
             return null;
         }
-        session.close();
+       
         Pic p = new Pic();
         p.setPic(bImage, length, type);
 

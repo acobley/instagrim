@@ -21,6 +21,7 @@ import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
 import uk.ac.dundee.computing.aec.instagrim.stores.UserProfile;
 import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrim.stores.CommentStore;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 
 /**
@@ -68,6 +69,7 @@ public void init(ServletConfig config) throws ServletException
        
         String args[] = Convertors.SplitRequestPath(request);
         String imageUUID = args[2];
+        
         createCommentList(imageUUID, request, response);
     
     
@@ -77,13 +79,13 @@ public void init(ServletConfig config) throws ServletException
     {
         PicModel pm = new PicModel();
         pm.setCluster(cluster);
-        java.util.LinkedList<Pic> commentList = pm.getComments(imageUUID);
+        java.util.LinkedList<CommentStore> commentList = pm.getComments(imageUUID);
         RequestDispatcher rd = request.getRequestDispatcher("/commentsPage.jsp");
+        request.setAttribute("pic", imageUUID);
         request.setAttribute("commentList", commentList);
         rd.forward(request, response);  
     
     }
-    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -98,9 +100,11 @@ public void init(ServletConfig config) throws ServletException
     {
         String comment = request.getParameter ("comment");
         String pUUID = request.getParameter ("picid");
+        String user = request.getParameter ("user");
+        System.out.println("info:----------------" + comment + pUUID + user);
         PicModel pm = new PicModel();
         pm.setCluster(cluster);
-        pm.submitComment(comment, pUUID);
+        pm.submitComment(comment, pUUID, user);
         response.sendRedirect("/Instagrim/Comments/"+pUUID);
     }
 

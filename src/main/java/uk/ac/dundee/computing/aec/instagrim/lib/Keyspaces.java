@@ -51,6 +51,15 @@ public final class Keyspaces {
                     + "      bio text,\n "
                     + "      addresses  map<text, frozen <address>>,\n"
                     + "   );";
+            
+            String CreateComTable = "CREATE TABLE if not exists instagrim.comments (\n"
+                    + "      commentid UUID PRIMARY KEY,\n"   
+                    + "      picid UUID,\n"
+                    + "      comment list<text>,\n"
+                    + "      user text,\n"
+                    + "      );";
+            String createComIndex = "CREATE INDEX if not exists ON instagrim.comments (picid);";
+                    
             Session session = c.connect();
             try {
                 PreparedStatement statement = session
@@ -94,6 +103,19 @@ public final class Keyspaces {
                 session.execute(cqlQuery);
             } catch (Exception et) {
                 System.out.println("Can't create Address Profile " + et);
+            }
+            System.out.println("" + CreateComTable);
+            try {
+                SimpleStatement cqlQuery = new SimpleStatement(CreateComTable);
+                session.execute(cqlQuery);
+            } catch (Exception et) {
+                System.out.println("Cannot create comments table " + et);
+            }
+            try {
+                SimpleStatement cqlQuery = new SimpleStatement(createComIndex);
+                session.execute(cqlQuery);
+            } catch (Exception et) {
+                System.out.println("Cannot create index " + et);
             }
             session.close();
 

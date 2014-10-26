@@ -7,8 +7,8 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
 
 import com.datastax.driver.core.utils.Bytes;
 import java.nio.ByteBuffer;
-import java.util.Set;
 import java.util.UUID;
+
 
 /**
  *
@@ -21,24 +21,7 @@ public class Pic {
     private int length;
     private String type;
     private java.util.UUID UUID=null;
-    private Set<String> comments;
-    private String user;
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public Set<String> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<String> comments) {
-        this.comments = comments;
-    }
+    
     
     public void Pic() {
 

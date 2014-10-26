@@ -99,7 +99,7 @@ public class editProfInfo extends HttpServlet {
         us.setCluster(cluster);
         us.updateUser(username, firstName, lastName, email, bio);
         
-	response.sendRedirect("/Instagrim");
+	response.sendRedirect("/Instagrim/Profile/"+username);
         
     }
 

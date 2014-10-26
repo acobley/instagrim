@@ -41,11 +41,9 @@ public boolean RegisterUser(String username, String Password, String firstName, 
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email,bio) Values(?,?,?,?,?,?)");
         BoundStatement boundStatement = new BoundStatement(ps);
-        session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
-                        username,EncodedPassword,firstName,lastName,email,bio));
-        //We are assuming this always works.  Also a transaction would be good here !
+        session.execute(boundStatement.bind(username,EncodedPassword,firstName,lastName,email,bio));
         
+        session.close();
         return true;
     }
     
@@ -55,24 +53,24 @@ public boolean RegisterUser(String username, String Password, String firstName, 
         PreparedStatement ps = session.prepare("update userprofiles set first_name =?, last_name = ?, email = ?, bio = ? where login = ?");
        
         BoundStatement boundStatement = new BoundStatement(ps);
-        session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
+        session.execute( 
+                boundStatement.bind( 
                         firstName,lastName,email,bio,username));
-        //We are assuming this always works.  Also a transaction would be good here !
         
+        session.close();
         return true;
     }
     
     public boolean CheckExisting(String username)
     {
-        Session sessions = cluster.connect("instagrim");
-        PreparedStatement ps = sessions.prepare ("select login from userprofiles where login = ?");
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare ("select login from userprofiles where login = ?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
-         rs = sessions.execute(
+         rs = session.execute(
                 boundStatement.bind( 
                         username));
-        
+        session.close();
         if (rs.isExhausted()) {
             System.out.println("User not in database!");
             return true;
@@ -81,6 +79,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
             {
                 return false; 
             }
+    
     }
     
     
@@ -93,6 +92,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         user));
+        session.close();
         if (rs.isExhausted()) {
             System.out.println("No user found");
             return null;
@@ -114,6 +114,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
                 Userinfo.push(userprof);
                }
         }
+       
         return Userinfo;
     }
     
@@ -122,6 +123,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
         Session session = cluster.connect("instagrim");
         ResultSet rs = null;
         rs = session.execute("select login, picid from userprofiles");
+        session.close();
         if (rs.isExhausted()) {
             System.out.println("No users found");
             return null;
@@ -135,6 +137,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
                 Userinfo.push(userprof);
                }
         }
+        session.close();session.close();
         return Userinfo;
     }
     
@@ -154,20 +157,23 @@ public boolean RegisterUser(String username, String Password, String firstName, 
         rs = session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
+        session.close();
         if (rs.isExhausted()) {
             System.out.println("No Images returned");
+            
             return false;
         } else {
             for (Row row : rs) {
                
                 String StoredPass = row.getString("password");
                 if (StoredPass.compareTo(EncodedPassword) == 0)
+                   
                     return true;
             }
         }
    
         
-    
+    session.close();
     return false;  
     }
        public void setCluster(Cluster cluster) {
