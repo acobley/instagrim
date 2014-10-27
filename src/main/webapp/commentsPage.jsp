@@ -29,13 +29,13 @@
         {   
             String uuid = (String) request.getAttribute("pic");
 %>    
-            <a href="/Instagrim/Image/<%=uuid%>"><img src="/Instagrim/Thumb/<%=uuid%>"></a><br/>
+            <a href="/Instagrimss/Image/<%=uuid%>"><img src="/Instagrimss/Thumb/<%=uuid%>"></a><br/>
 <%
         }
      else {
 %>    
             <p> not logged in! </p>
-            <li class="footer"><a href="/Instagrim">Home</a></li>
+            <li class="footer"><a href="/Instagrimss">Home</a></li>
             
  <%}
      java.util.LinkedList<CommentStore> commentsList = (java.util.LinkedList<CommentStore>) request.getAttribute("commentList");
@@ -60,7 +60,7 @@
 %>
                                         
     <p>   
-        user:<%=user%>
+        user:<li><a href="/Instagrimss/Profile/<%=user%>"> <%=user%> </a></li>
         comment:<%=comment%>
     </p>  
   
@@ -91,7 +91,7 @@
    </body> 
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/Instagrimss">Home</a></li>
             </ul>
         </footer>
 </html>

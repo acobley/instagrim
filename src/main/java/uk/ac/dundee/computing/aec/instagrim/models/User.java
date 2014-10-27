@@ -38,7 +38,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimss");
         PreparedStatement ps = session.prepare("insert into userprofiles (login,password,first_name,last_name,email,bio) Values(?,?,?,?,?,?)");
         BoundStatement boundStatement = new BoundStatement(ps);
         session.execute(boundStatement.bind(username,EncodedPassword,firstName,lastName,email,bio));
@@ -49,7 +49,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
     
     public boolean updateUser(String username,String firstName, String lastName, String email, String bio){
        
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimss");
         PreparedStatement ps = session.prepare("update userprofiles set first_name =?, last_name = ?, email = ?, bio = ? where login = ?");
        
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -63,7 +63,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
     
     public boolean CheckExisting(String username)
     {
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimss");
         PreparedStatement ps = session.prepare ("select login from userprofiles where login = ?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -85,7 +85,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
     
     public java.util.LinkedList<UserProfile> getUserinfo(String user) {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimss");
         PreparedStatement ps = session.prepare("select login, first_name, last_name, picid, email, bio from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -120,7 +120,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
     
     public java.util.LinkedList<UserProfile> getUserNames() {
         java.util.LinkedList<UserProfile> Userinfo = new java.util.LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimss");
         ResultSet rs = null;
         rs = session.execute("select login, picid from userprofiles");
         session.close();
@@ -150,7 +150,7 @@ public boolean RegisterUser(String username, String Password, String firstName, 
             System.out.println("Can't check your password");
             return false;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimss");
         PreparedStatement ps = session.prepare("select password from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);

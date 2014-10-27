@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
-        <link rel="stylesheet" type="text/css" href="/Instagrim/Styles.css" />
+        <link rel="stylesheet" type="text/css" href="/Instagrimss/Styles.css" />
     </head>
     <body>
         <header>
@@ -23,8 +23,8 @@
         
         <nav>
             <ul>
-                <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <li class="nav"><a href="/Instagrimss/upload.jsp">Upload</a></li>
+                <li class="nav"><a href="/Instagrimss/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
  
@@ -43,7 +43,7 @@
                 Pic p = (Pic) iterator.next();
 
         %>
-        <a href="/Instagrim/Comments/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
+        <a href="/Instagrimss/Comments/<%=p.getSUUID()%>" ><img src="/Instagrimss/Thumb/<%=p.getSUUID()%>"></a><br/><%
 
             }
             }
@@ -51,13 +51,13 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/Instagrimss">Home</a></li>
             </ul>
         </footer>
     </body>
     
     <% if (session == null){
-        response.sendRedirect("/Instagrim");
+        response.sendRedirect("/Instagrimss");
     }
     
     

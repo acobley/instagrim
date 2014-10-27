@@ -25,7 +25,7 @@
      if (userInfo == null)
      {
 %>   <p> No Profile Found </p>
-     <li class="footer"><a href="/Instagrim">Home</a></li>
+     <li class="footer"><a href="/Instagrimss">Home</a></li>
 <%   } 
      else
       {
@@ -53,22 +53,22 @@
         }
              else{
 %>
-                <a href="/Instagrim/Image/<%=user.getUUID()%>" ><img src="/Instagrim/Thumb/<%=user.getUUID()%>"></a><br/>  
+                <a href="/Instagrimss/Image/<%=user.getUUID()%>" ><img src="/Instagrimss/Thumb/<%=user.getUUID()%>"></a><br/>  
                 <br>
                 <br>
 <%              }
                 if(lg.getUsername()!= null && user.getLogin().compareTo(lg.getUsername())== 0)
                 {
 %>                  
-                    <li><a href="/Instagrim/upload.jsp">Edit your profile Picture</a></li>
-                    <li><a href="/Instagrim/Images/<%=user.getLogin()%>">Your Images</a></li>
-                    <li><a href="/Instagrim/editProfInfo/<%=user.getLogin()%>"> Edit your Profile Information </a></li>     
+                    <li><a href="/Instagrimss/upload.jsp">Edit your profile Picture</a></li>
+                    <li><a href="/Instagrimss/Images/<%=user.getLogin()%>">Your Images</a></li>
+                    <li><a href="/Instagrimss/editProfInfo/<%=user.getLogin()%>"> Edit your Profile Information </a></li>     
 <%       
                 }
                     else
                 {
 %>                
-                    <li><a href="/Instagrim/Images/<%=user.getLogin()%>"><%=user.getLogin()%>'s images</a></li>
+                    <li><a href="/Instagrimss/Images/<%=user.getLogin()%>"><%=user.getLogin()%>'s images</a></li>
                     <p> </p>
 <%
                 }
@@ -77,7 +77,7 @@
  </body>
 <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/Instagrimss">Home</a></li>
                 <li>&COPY; Shaun C</li>
             </ul>
 </footer>

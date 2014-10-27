@@ -105,7 +105,7 @@ public void init(ServletConfig config) throws ServletException
         PicModel pm = new PicModel();
         pm.setCluster(cluster);
         pm.submitComment(comment, pUUID, user);
-        response.sendRedirect("/Instagrim/Comments/"+pUUID);
+        response.sendRedirect("/Instagrimss/Comments/"+pUUID);
     }
 
     /**

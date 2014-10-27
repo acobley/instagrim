@@ -65,7 +65,7 @@ public class Logout extends HttpServlet {
         processRequest(request, response);
         
          request.getSession().invalidate();
-         response.sendRedirect("/Instagrim");
+         response.sendRedirect("/Instagrimss");
          
     }
 

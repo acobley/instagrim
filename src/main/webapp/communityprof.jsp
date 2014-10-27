@@ -39,7 +39,7 @@
             
         %>
         <div><img src="http://www.bensdiscountsupply.com/images/products/detail/black_thumbnail.jpg"width ="100" height ="100"></a></li>    
-        <a href="/Instagrim/Profile/<%=user.getLogin()%>"> <%=user.getLogin()%>'s Profile </a> </div>
+        <a href="/Instagrimss/Profile/<%=user.getLogin()%>"> <%=user.getLogin()%>'s Profile </a> </div>
         <br> 
         <br>
         <%
@@ -47,8 +47,8 @@
          else
          {
          %>
-        <div><a href="/Instagrim/Image/<%=user.getUUID()%>" ><img src="/Instagrim/Thumb/<%=user.getUUID()%>"width ="100" height ="100"></a></li>    
-        <a href="/Instagrim/Profile/<%=user.getLogin()%>"> <%=user.getLogin()%>'s Profile </a> </div>
+        <div><a href="/Instagrimss/Image/<%=user.getUUID()%>" ><img src="/Instagrimss/Thumb/<%=user.getUUID()%>"width ="100" height ="100"></a></li>    
+        <a href="/Instagrimss/Profile/<%=user.getLogin()%>"> <%=user.getLogin()%>'s Profile </a> </div>
         <br> 
         <br>
          <%
@@ -62,7 +62,7 @@
     
     <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/Instagrimss">Home</a></li>
                 <li>&COPY; Shaun C</li>
             </ul>
     </footer>

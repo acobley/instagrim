@@ -20,7 +20,7 @@
         <nav>
             <ul>
                 
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <li><a href="/Instagrimss/Images/majed">Sample Images</a></li>
             </ul>
         </nav>
        
@@ -42,7 +42,7 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/Instagrimss">Home</a></li>
             </ul>
         </footer>
     </body>

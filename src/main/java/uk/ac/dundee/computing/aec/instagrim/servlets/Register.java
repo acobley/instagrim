@@ -58,11 +58,11 @@ public class Register extends HttpServlet {
         if (existingUser == true)
         { us.RegisterUser(username, password, firstName, lastName, email, bio);
         
-            response.sendRedirect("/Instagrim");
+            response.sendRedirect("/Instagrimss");
         }
         else
         {
-           response.sendRedirect("/Instagrim");
+           response.sendRedirect("/Instagrimss");
         }
         
         

@@ -52,7 +52,7 @@
 
     <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/Instagrimss">Home</a></li>
                 <li>&COPY; Shaun C</li>
             </ul>
     </footer>
