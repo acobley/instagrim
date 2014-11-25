@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>uk.ac.dundee.computing.aec</groupId>
-    <artifactId>Instagrim</artifactId>
+    <artifactId>SaveTheSemester</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Instagrim</name>
+    <name>SaveTheSemester</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
