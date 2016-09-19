@@ -132,6 +132,7 @@ public class Image extends HttpServlet {
             String type = part.getContentType();
             String filename = part.getSubmittedFileName();
             
+            
             InputStream is = request.getPart(part.getName()).getInputStream();
             int i = is.available();
             HttpSession session=request.getSession();
