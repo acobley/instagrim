@@ -8,9 +8,32 @@ and open the template in the editor.
     Author     : Administrator
 */
 
+header{
+    text-align: center;
+    font-family: "Helvetica", sans-serif;
+    color: white;
+    background-color: black;
+}
 
+footer{
+    text-align: center;
+    color: white;
+    background-color: black;
+}
 nav {
     text-align: left;
-    border: 2px;
+    border: 5px;
     float: right;
+    line-height:20px;
+    background-color:#eeeeee;
+    height: auto;
+    width: auto;
+}
+
+ul li{
+    list-style-type:  square;
+}
+
+footer ul li{
+    list-style-type:  none;
 }

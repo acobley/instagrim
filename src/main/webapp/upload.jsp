@@ -13,8 +13,10 @@
         <link rel="stylesheet" type="text/css" href="Styles.css" />
     </head>
     <body>
-        <h1>InstaGrim ! </h1>
-        <h2>Your world in Black and White</h2>
+        <header>
+            <h1>InstaGrim ! </h1>
+            <h2>Your world in Black and White</h2>
+        </header>
         <nav>
             <ul>
                 <li class="nav"><a href="upload.jsp">Upload</a></li>
@@ -35,6 +37,7 @@
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li>&COPY; Andy C</li>
             </ul>
         </footer>
     </body>
