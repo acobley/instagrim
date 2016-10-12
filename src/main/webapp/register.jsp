@@ -18,28 +18,35 @@
         <h2>Your world in Black and White</h2>
         </header>
         <nav>
-            <ul>
-                
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
+            <table>
+                <tr>
+                    <th><a  class="footer"><a href="/Instagrim">Home Page</a></th>
+                </tr>
+                <tr>
+                    <th><a href="/Instagrim/Images/majed">Sample Images</a></th>
+                </tr>
+                <tr>
+                    <th><a href="login.jsp">Login</a></th>
+                </tr>
+            </table>
         </nav>
-       
+       <div id = "RegisterForm">
         <article>
-            <h3>Register as user</h3>
+            <h3>Sign Up!</h3>
             <form method="POST"  action="Register">
-                <ul>
-                    <li>User Name <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
-                </ul>
+                First Name    <input type="text" name="firstname">
+                Second Name    <input type="text" name="secondname">
+                Username <input type="text" name="username">
+                Password <input type="password" name="password">
+                
                 <br/>
-                <input type="submit" value="Regidter"> 
+                <input type="submit" value="Register" class="RegisterBtn"> 
             </form>
 
         </article>
+           </div>
         <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
+            
         </footer>
     </body>
 </html>

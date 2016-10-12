@@ -54,7 +54,7 @@ public class Logout extends HttpServlet {
   
             //request.setAttribute("LoggedIn", lg);
             
-            session.setAttribute("LoggedIn", null);
+        session.setAttribute("LoggedIn", null);
 	response.sendRedirect("/Instagrim");
     }
 

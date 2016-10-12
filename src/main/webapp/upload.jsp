@@ -16,26 +16,28 @@
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
         <nav>
-            <ul>
-                <li class="nav"><a href="upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/majed">Sample Images</a></li>
-            </ul>
+            <table>
+                <tr>
+                <td><a href="/Instagrim">Home Page</a></td>
+                <td class="nav"><a href="/Instagrim/Images/SampleImages">Sample Images</a></td>
+                </tr>          
+            </table>
         </nav>
  
+       <div id="UploadForm">
         <article>
             <h3>File Upload</h3>
             <form method="POST" enctype="multipart/form-data" action="Image">
                 File to upload: <input type="file" name="upfile"><br/>
 
                 <br/>
-                <input type="submit" value="Press"> to upload the file!
+                <input type="submit" value="Upload" class="UploadBtn">
             </form>
 
         </article>
+               </div>
         <footer>
-            <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
-            </ul>
+            
         </footer>
     </body>
 </html>
