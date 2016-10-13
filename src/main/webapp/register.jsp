@@ -20,13 +20,9 @@
         <nav>
             <table>
                 <tr>
-                    <th><a  class="footer"><a href="/Instagrim">Home Page</a></th>
-                </tr>
-                <tr>
-                    <th><a href="/Instagrim/Images/majed">Sample Images</a></th>
-                </tr>
-                <tr>
-                    <th><a href="login.jsp">Login</a></th>
+                    <td><a  class="footer"><a href="/Instagrim">Home Page</a></td>
+                    <td><a href="/Instagrim/Images/majed">Sample Images</a></td>
+                    <td><a href="login.jsp">Login</a></td>
                 </tr>
             </table>
         </nav>

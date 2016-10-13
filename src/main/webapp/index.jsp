@@ -23,7 +23,7 @@
         <nav>
             <table>
                 <tr>
-                    <th><a href="upload.jsp">Upload </a></th>
+                    <td><a href="upload.jsp">Upload </a></td>
                     <%
                         
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -31,18 +31,14 @@
                             String UserName = lg.getUsername();
                             if (lg.getlogedin()) {
                     %>
-                </tr>
-                <tr>
-                    <th><a href="/Instagrim/Images/<%=lg.getUsername()%>">Profile Page</a></th>
+
+                    <td><a href="/Instagrim/Images/<%=lg.getUsername()%>">Profile Page</a></td>
                     <%}
                             }else{
                                 %>
-                </tr>
-                <tr>
-                    <th><a href="register.jsp">Register</a></th>
-                </tr>
-                <tr>
-                    <th><a href="login.jsp">Login</a></th>
+                                
+                    <td><a href="register.jsp">Register</a></td>
+                    <td><a href="login.jsp">Login</a></td>
                 <%
                                         
                             
@@ -67,6 +63,8 @@
                     <img src = "http://lorempixel.com/430/500/" alt="image" class="grid-item">
                     <img src = "http://lorempixel.com/200/200/" alt="image" class="grid-item">
                     <img src = "http://lorempixel.com/300/300/" alt="image" class="grid-item">
+                    <img src = "http://lorempixel.com/120/200/" alt="image" class="grid-item">
+                    <img src = "http://lorempixel.com/320/120/" alt="image" class="grid-item">
                     </div>
                 <script src ="FrontPage.js">
                     </script>

@@ -19,13 +19,13 @@
         <header>
             <h1>InstaGrim ! </h1>
             <h2>Your world in Black and White</h2>
-            <h3><a href="#">${LoggedIn.getUsername()}</a></h3>
+            <h3><a href="#">Hello, ${LoggedIn.getUsername()}</a></h3>
         </header>
         
         <nav>
             <table>
                 <tr>
-                    <td><a  class="footer"><a href="/Instagrim">Home Page</a></td>
+                    <td><a  class="nav"><a href="/Instagrim">Home Page</a></td>
                     <td><a class="nav"><a href="/Instagrim/upload.jsp">Upload</a></td>
                     <td><a class="nav"><a href="/Instagrim/Logout">Logout</a></td>
                 </tr> 

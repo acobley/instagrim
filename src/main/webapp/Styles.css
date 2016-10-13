@@ -133,11 +133,15 @@ th:hover{
 }
 
 .grid{
-    width: 100%;  
+    width: 60%;
+    margin: auto;
 }
 
 @media (max-width: 300px){
     .grid-item {
+        width: 100%
+    }
+    .grid {
         width: 100%
     }
 }
@@ -145,10 +149,16 @@ th:hover{
     .grid-item {
         width: 50%
     }
+    .grid {
+        width: 100%;
+    }
 }
 @media (min-width: 550px) and (max-width: 750px){
     .grid-item {
         width: 33.33%
+    }
+    .grid {
+        width: 100%;
     }
 }
 /*
