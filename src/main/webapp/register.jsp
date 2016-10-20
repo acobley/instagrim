@@ -30,10 +30,10 @@
         <article>
             <h3>Sign Up!</h3>
             <form method="POST"  action="Register">
-                First Name    <input type="text" name="firstname" pattern=".{1,10}" required title="Enter Username">
-                Second Name    <input type="text" name="secondname" pattern=".{1,10}" required title="Enter Username">
-                Username <input type="text" name="username" pattern=".{4,10}" required title="4 to 10 characters">
-                Password <input type="password" name="password" pattern=".{4,10}" required title="4 to 10 characters">
+                <input type="text" name="firstname" placeholder="Firstname" pattern=".{1,10}" required title="Enter Username">
+                <input type="text" name="secondname" placeholder="Surname" pattern=".{1,10}" required title="Enter Username">
+                <input type="text" name="username" placeholder="Username" pattern=".{4,10}" required title="4 to 10 characters">
+                <input type="password" name="password" placeholder="Password" pattern=".{4,10}" required title="4 to 10 characters">
                 
                 <br/>
                 <input type="submit" value="Register" class="RegisterBtn"> 

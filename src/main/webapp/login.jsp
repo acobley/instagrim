@@ -31,9 +31,8 @@
         <article>
             <h3>LOGIN</h3>
             <form method="POST"  action="Login">
-                
-                Username</label> <input type="text" name="username" pattern=".{4,10}" required title="Enter Username">
-            Password</label> <input type="password" name="password" pattern=".{4,10}" required title="Enter Username">
+                </label> <input type="text" name="username" placeholder="Username" pattern=".{4,10}" required title="Enter Username">
+                </label> <input type="password" name="password" placeholder="Password" pattern=".{4,10}" required title="Enter Username">
                 
                 <br/>
                 <input type="submit" value="Login" class="LogInButton"> 
