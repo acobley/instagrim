@@ -69,7 +69,8 @@ public class Login extends HttpServlet {
 	    rd.forward(request,response);
             
         }else{
-            response.sendRedirect("/Instagrim/login.jsp");
+            RequestDispatcher rd=request.getRequestDispatcher("/Login");
+	    rd.forward(request,response);
         }
         
     }

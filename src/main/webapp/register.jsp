@@ -32,8 +32,8 @@
             <form method="POST"  action="Register">
                 First Name    <input type="text" name="firstname" pattern=".{1,10}" required title="Enter Username">
                 Second Name    <input type="text" name="secondname" pattern=".{1,10}" required title="Enter Username">
-                Username <input type="text" name="username" pattern=".{5,10}" required title="5 to 10 characters">
-                Password <input type="password" name="password" pattern=".{5,10}" required title="5 to 10 characters">
+                Username <input type="text" name="username" pattern=".{4,10}" required title="4 to 10 characters">
+                Password <input type="password" name="password" pattern=".{4,10}" required title="4 to 10 characters">
                 
                 <br/>
                 <input type="submit" value="Register" class="RegisterBtn"> 

@@ -20,6 +20,7 @@
             <h1>InstaGrim ! </h1>
             <h2>Your world in Black and White</h2>
             <h3><a href="#">Hello,<%=request.getAttribute("firstname")%></a></h3>
+            
         </header>
         
         <nav>
