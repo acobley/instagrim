@@ -74,6 +74,8 @@ public final class Keyspaces {
             System.out.println("" + Createuserpiclist);
 
             try {
+                //SimpleStatement cqlQuery1 = new SimpleStatement("DROP TABLE instagrim.Createuserpiclist;");
+                //session.execute(cqlQuery1);
                 SimpleStatement cqlQuery = new SimpleStatement(Createuserpiclist);
                 session.execute(cqlQuery);
             } catch (Exception et) {
@@ -88,6 +90,8 @@ public final class Keyspaces {
             }
             System.out.println("" + CreateUserProfile);
             try {
+                //SimpleStatement cqlQuery1 = new SimpleStatement("DROP TABLE instagrim.userprofiles;");
+                //session.execute(cqlQuery1);
                 SimpleStatement cqlQuery = new SimpleStatement(CreateUserProfile);
                 session.execute(cqlQuery);
             } catch (Exception et) {
