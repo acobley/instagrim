@@ -22,7 +22,7 @@
                 <tr>
                     <td><a  class="footer"><a href="/Instagrim">Home Page</a></td>
                     <td><a href="/Instagrim/Images/majed">Sample Images</a></td>
-                    <td><a href="login.jsp">Login</a></td>
+                    <td><a href="/Instagrim/Login">Login</a></td>
                 </tr>
             </table>
         </nav>
@@ -30,10 +30,10 @@
         <article>
             <h3>Sign Up!</h3>
             <form method="POST"  action="Register">
-                First Name    <input type="text" name="firstname">
-                Second Name    <input type="text" name="secondname">
-                Username <input type="text" name="username">
-                Password <input type="password" name="password">
+                First Name    <input type="text" name="firstname" pattern=".{1,10}" required title="Enter Username">
+                Second Name    <input type="text" name="secondname" pattern=".{1,10}" required title="Enter Username">
+                Username <input type="text" name="username" pattern=".{5,10}" required title="5 to 10 characters">
+                Password <input type="password" name="password" pattern=".{5,10}" required title="5 to 10 characters">
                 
                 <br/>
                 <input type="submit" value="Register" class="RegisterBtn"> 

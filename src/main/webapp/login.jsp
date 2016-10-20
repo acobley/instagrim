@@ -23,7 +23,7 @@
                 <tr>
                     <td><a href="/Instagrim">Home Page</a></td>
                     <td><a href="/Instagrim/Images/majed">Sample Images</a></td>
-                    <td><a href="register.jsp">Register</a></td>
+                    <td><a href="/Instagrim/Register">Register</a></td>
                 </tr>
             </table>
         </nav>
@@ -32,8 +32,8 @@
             <h3>LOGIN</h3>
             <form method="POST"  action="Login">
                 
-                Username</label> <input type="text" name="username">
-                Password</label> <input type="password" name="password">
+                Username</label> <input type="text" name="username" pattern=".{1,10}" required title="Enter Username">
+            Password</label> <input type="password" name="password" pattern=".{1,10}" required title="Enter Username">
                 
                 <br/>
                 <input type="submit" value="Login" class="LogInButton"> 

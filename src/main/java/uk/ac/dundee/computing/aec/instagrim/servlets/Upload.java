@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package uk.ac.dundee.computing.aec.instagrim.servlets;
 
 import com.datastax.driver.core.Cluster;
@@ -16,15 +15,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
 import uk.ac.dundee.computing.aec.instagrim.models.User;
+import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
 /**
  *
- * @author Administrator
+ * @author Lami
  */
-@WebServlet(name = "Register", urlPatterns = {"/Register"})
-public class Register extends HttpServlet {
+@WebServlet(name = "Upload", urlPatterns = {"/Upload"})
+public class Upload extends HttpServlet {
     Cluster cluster=null;
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
@@ -42,26 +43,10 @@ public class Register extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException { 
-        String firstname=request.getParameter("firstname");
-        String secondname=request.getParameter("secondname");
-        String username=request.getParameter("username");
-        String password=request.getParameter("password");
-        System.out.println(firstname);
-        System.out.println(secondname);
-        User us=new User();
-        us.setCluster(cluster);
-        us.RegisterUser(username, password, firstname, secondname);
-        
-	response.sendRedirect("/Instagrim");
-        
-        
-    }
+    
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd=request.getRequestDispatcher("register.jsp");
+        RequestDispatcher rd=request.getRequestDispatcher("upload.jsp");
         rd.forward(request,response);
     }
 

@@ -23,7 +23,7 @@
         <nav>
             <table>
                 <tr>
-                    <td><a href="upload.jsp">Upload </a></td>
+                    <td><a href="/Instagrim/Upload">Upload </a></td>
                     <%
                         
                         LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
@@ -37,8 +37,8 @@
                             }else{
                                 %>
                                 
-                    <td><a href="register.jsp">Register</a></td>
-                    <td><a href="login.jsp">Login</a></td>
+                    <td><a href="/Instagrim/Register">Register</a></td>
+                    <td><a href="/Instagrim/Login">Login</a></td>
                 <%
                                         
                             

@@ -37,12 +37,12 @@ public class User {
             return false;
         }
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("insert into userprofiles (login,password) Values(?,?)");
+        PreparedStatement ps = session.prepare("insert into userprofiles (firstname,lastname,login,password) Values(?,?,?,?)");
        
         BoundStatement boundStatement = new BoundStatement(ps);
         session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        username,EncodedPassword));
+                        firstname,secondname,username,EncodedPassword));
         //We are assuming this always works.  Also a transaction would be good here !
         
         return true;
@@ -75,9 +75,37 @@ public class User {
                     return true;
             }
         }
+        return false;
+    }
    
-    
-    return false;  
+    /**
+     *
+     * @param username
+     * @return
+     */
+    public String getFirstname(String username)
+    {
+        String name = null;
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select first_name from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        session.close();
+        
+        if (rs.isExhausted()) {
+            System.out.println("No Images returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+               
+                 name = row.getString("first_name");
+                 
+            }
+             return name;
+        } 
     }
        public void setCluster(Cluster cluster) {
         this.cluster = cluster;
