@@ -19,7 +19,7 @@
         <header>
             <h1>InstaGrim ! </h1>
             <h2>Your world in Black and White</h2>
-            <h3><a href="#">Hello,<%=request.getAttribute("firstname")%></a></h3>
+            <h3><a href="#">Hello, <%=request.getAttribute("firstname")%></a></h3>
             
         </header>
         
@@ -34,7 +34,6 @@
         </nav>
         
         <article>
-            <h1> Uploads </h1>
             <%
                 java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
                 if (lsPics == null) {
@@ -48,7 +47,7 @@
                         Pic p = (Pic) iterator.next();
 
             %>
-            <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img class="grid" src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+            <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img class="grid-item" src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
             <%
                     }
                 }

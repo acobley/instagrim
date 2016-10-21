@@ -54,8 +54,11 @@ public class Register extends HttpServlet {
         System.out.println(secondname);
         User us=new User();
         us.setCluster(cluster);
+        if(us.ExistingUser(username))
         us.RegisterUser(username, password, firstname, secondname, email);
-        
+        else{
+            System.out.println("User already exists");
+        }
 	response.sendRedirect("/Instagrim");
         
         

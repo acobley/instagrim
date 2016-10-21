@@ -42,7 +42,7 @@ public class User {
         BoundStatement boundStatement = new BoundStatement(ps);
         session.execute( // this is where the query is executed
                 boundStatement.bind( // here you are binding the 'boundStatement'
-                        firstname,secondname,username,email,EncodedPassword));
+                        firstname,secondname,username,EncodedPassword,email));
         //We are assuming this always works.  Also a transaction would be good here !
         
         return true;
@@ -78,6 +78,30 @@ public class User {
         return false;
     }
    
+    public boolean ExistingUser(String username){
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        username));
+        if (rs.isExhausted()) {
+            System.out.println("User already exists");
+            return false;
+        } else {
+            for (Row row : rs) {
+               
+                String StoredPass = row.getString("login");
+                if (StoredPass == null)
+                    return true;
+                else 
+                    return false;
+            }
+        }
+        return false;
+    }
+    
     /**
      *
      * @param username
@@ -87,7 +111,7 @@ public class User {
     {
         String name = null;
         Session session = cluster.connect("instagrim");
-        PreparedStatement ps = session.prepare("select first_name from userprofiles where login =?");
+        PreparedStatement ps = session.prepare("select firstname from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
         rs = session.execute( // this is where the query is executed
@@ -101,7 +125,7 @@ public class User {
         } else {
             for (Row row : rs) {
                
-                 name = row.getString("first_name");
+                 name = row.getString("firstname");
                  
             }
              return name;

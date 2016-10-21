@@ -65,9 +65,9 @@ public class Login extends HttpServlet {
             
             session.setAttribute("LoggedIn", lg);
             System.out.println("Session in servlet "+session);
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-	    rd.forward(request,response);
-            
+            //RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+	    //rd.forward(request,response);
+            response.sendRedirect("/Instagrim");
         }else{
             RequestDispatcher rd=request.getRequestDispatcher("/Login");
 	    rd.forward(request,response);

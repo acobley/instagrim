@@ -43,12 +43,16 @@ public final class Keyspaces {
                     + "  );";
             String CreateUserProfile = "CREATE TABLE if not exists instagrim.userprofiles (\n"
                     + "      login text PRIMARY KEY,\n"
-                     + "     password text,\n"
+                    + "      password text,\n"
                     + "      firstname text,\n"
                     + "      lastname text,\n"
                     + "      email text,\n"
                     + "      addresses  map<text, frozen <address>>\n"
                     + "  );";
+            String CreateComment = "CREATE TABLE if not exists instagrim.comments (\n)"
+                    +"       login text PRIMARY KEY,\n"
+                    +"       comment text,\n"
+                    +"   );";
             Session session = c.connect();
             try {
                 PreparedStatement statement = session
@@ -66,6 +70,8 @@ public final class Keyspaces {
             System.out.println("" + CreatePicTable);
 
             try {
+                //SimpleStatement cqlQuery1 = new SimpleStatement("DROP TABLE instagrim.CreatePicTable;");
+                //session.execute(cqlQuery1);
                 SimpleStatement cqlQuery = new SimpleStatement(CreatePicTable);
                 session.execute(cqlQuery);
             } catch (Exception et) {
@@ -83,11 +89,23 @@ public final class Keyspaces {
             }
             System.out.println("" + CreateAddressType);
             try {
+                //SimpleStatement cqlQuery1 = new SimpleStatement("DROP TABLE instagrim.CreateAddressType;");
+                //session.execute(cqlQuery1);
                 SimpleStatement cqlQuery = new SimpleStatement(CreateAddressType);
                 session.execute(cqlQuery);
             } catch (Exception et) {
                 System.out.println("Can't create Address type " + et);
             }
+            System.out.println("" + CreateComment);
+            try {
+                //SimpleStatement cqlQuery1 = new SimpleStatement("DROP TABLE instagrim.CreateComment;");
+                //session.execute(cqlQuery1);
+                SimpleStatement cqlQuery = new SimpleStatement(CreateComment);
+                session.execute(cqlQuery);
+            } catch (Exception et)
+                    {
+                        System.out.println("Can't add comment " + et);
+                    }
             System.out.println("" + CreateUserProfile);
             try {
                 //SimpleStatement cqlQuery1 = new SimpleStatement("DROP TABLE instagrim.userprofiles;");

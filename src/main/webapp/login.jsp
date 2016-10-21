@@ -22,7 +22,6 @@
             <table>
                 <tr>
                     <td><a href="/Instagrim">Home Page</a></td>
-                    <td><a href="/Instagrim/Images/majed">Sample Images</a></td>
                     <td><a href="/Instagrim/Register">Register</a></td>
                 </tr>
             </table>

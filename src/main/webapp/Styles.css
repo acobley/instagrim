@@ -14,7 +14,9 @@ and open the template in the editor.
 }
 
 nav {
-    text-align: left;
+    
+    text-align: center;
+    padding-left: 31.5%;
     border: 2px;
 }
 
@@ -102,15 +104,16 @@ input[type=text], input[type=password], select {
 }
 
 table {
+    table-align: centre;
     border-collapse: collapse;
-    width: 100%;
-    margin: 20px;
+    width: 50%;
+    margin: 10px;
 }
 
 th, td{
     margin-top: 5px;
     padding: 8px;
-    text-align: left;
+    text-align: center;
     border-bottom: 3px solid #ddd;
     border-radius: 5px;
 }

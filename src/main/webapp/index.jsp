@@ -32,7 +32,7 @@
                             if (lg.getlogedin()) {
                     %>
 
-                    <td><a href="/Instagrim/Images/<%=lg.getUsername()%>">Profile Page</a></td>
+                    <td><a href="/Instagrim/Images/<%=lg.getUsername()%>">My Pics</a></td>
                     <%}
                             }else{
                                 %>

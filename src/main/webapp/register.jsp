@@ -21,7 +21,6 @@
             <table>
                 <tr>
                     <td><a  class="footer"><a href="/Instagrim">Home Page</a></td>
-                    <td><a href="/Instagrim/Images/majed">Sample Images</a></td>
                     <td><a href="/Instagrim/Login">Login</a></td>
                 </tr>
             </table>
@@ -30,8 +29,9 @@
         <article>
             <h3>Sign Up!</h3>
             <form method="POST"  action="Register">
-                <input type="text" name="firstname" placeholder="Firstname" pattern=".{1,10}" required title="Enter Username">
-                <input type="text" name="secondname" placeholder="Surname" pattern=".{1,10}" required title="Enter Username">
+                <input type="text" name="firstname" placeholder="Firstname" pattern=".{1,10}" required title="Enter Firstname">
+                <input type="text" name="secondname" placeholder="Surname" pattern=".{1,10}" required title="Enter Surname">
+                <input type="text" name="email" placeholder="Email address" pattern=".{1,20}" required title="Enter Email">
                 <input type="text" name="username" placeholder="Username" pattern=".{4,10}" required title="4 to 10 characters">
                 <input type="password" name="password" placeholder="Password" pattern=".{4,10}" required title="4 to 10 characters">
                 
