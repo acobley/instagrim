@@ -19,7 +19,7 @@
             <table>
                 <tr>
                 <td><a href="/Instagrim">Home Page</a></td>
-                <td class="nav"><a href="/Instagrim/Images/SampleImages">Sample Images</a></td>
+                <td><a class="nav"><a href="/Instagrim/ProfilePage">Profile Page</a></td>
                 </tr>          
             </table>
         </nav>

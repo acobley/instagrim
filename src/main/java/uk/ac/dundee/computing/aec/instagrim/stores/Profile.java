@@ -9,6 +9,6 @@ package uk.ac.dundee.computing.aec.instagrim.stores;
  *
  * @author Lami
  */
-public class ProfilePage {
+public class Profile {
     
 }

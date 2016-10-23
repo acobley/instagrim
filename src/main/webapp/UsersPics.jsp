@@ -26,9 +26,10 @@
         <nav>
             <table>
                 <tr>
-                    <td><a  class="nav"><a href="/Instagrim">Home Page</a></td>
+                    <td><a class="nav"><a href="/Instagrim">Home Page</a></td>
                     <td><a class="nav"><a href="/Instagrim/Upload">Upload</a></td>
                     <td><a class="nav"><a href="/Instagrim/Logout">Logout</a></td>
+                    <td><a class="nav"><a href="/Instagrim/Profile">Profile Page</a></td>
                 </tr> 
             </table>
         </nav>

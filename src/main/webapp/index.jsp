@@ -31,7 +31,7 @@
                             String UserName = lg.getUsername();
                             if (lg.getlogedin()) {
                     %>
-
+                    <td><a class="nav"><a href="/Instagrim/Profile">Profile Page</a></td>
                     <td><a href="/Instagrim/Images/<%=lg.getUsername()%>">My Pics</a></td>
                     <%}
                             }else{
