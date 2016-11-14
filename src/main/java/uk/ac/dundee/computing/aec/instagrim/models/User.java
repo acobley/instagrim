@@ -88,7 +88,7 @@ public class User {
                         username));
         if (rs.isExhausted()) {
             System.out.println("User already exists");
-            return false;
+            return true;
         } else {
             for (Row row : rs) {
                
